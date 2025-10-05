@@ -11,7 +11,7 @@ class Document(ABC):
     print: is the blueprint for each document derived from this class
 
     Properties:
-    extension str: the blueprint for the each document derived from the Document
+    extension str: the blueprint for each document derived from the Document
     blueprint
     """
 
@@ -68,7 +68,7 @@ class MarkdownDocument(Document):
 
 class DocumentCreator(ABC):
     """
-    DocumentCreator is the engine that enables us to uset the factory method functionality
+    DocumentCreator is the engine that enables us to use the factory method functionality
     - Instantiate/cache Document class for initial usage or re-use
     - Implement common methods that each document created exposes to the client side
     """
