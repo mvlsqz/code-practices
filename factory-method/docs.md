@@ -4,10 +4,10 @@ interface for creating objects in a superclass but allows subclasses to alter
 the type of objects that will be created. This pattern is particularly useful
 when the exact type of the object to be created is determined at runtime.
 
-The Factory Method pattern suggest that you replace direct object construction
+The Factory Method pattern suggests that you replace direct object construction
 call (using the `new` operator) with calls to a special *factory* method being
 called from within the factory method. These Objects are often referred to as
-*products* 
+*products*
   > refactor.guru
 
 
