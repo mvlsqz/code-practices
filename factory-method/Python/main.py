@@ -96,10 +96,16 @@ class DocumentCreator(ABC):
         pass
 
     def print_document(self):
+        """
+        Prints the document using the cached or newly created document instance.
+        """
         document = self.base_document()
         document.print()
 
     def print_document_extension(self):
+        """
+        Prints the file extension of the cached or newly created document instance.
+        """
         document = self.base_document()
         print(document.extension)
 
