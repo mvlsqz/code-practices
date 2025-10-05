@@ -3,16 +3,18 @@ from abc import ABC, abstractmethod
 
 class Document(ABC):
     """
-    Document class is the base abstraction for document implementation
+    Base abstraction for document implementations.
 
-    methods
+    Attributes
+    ----------
+    extension : str
+        The file extension for the document type
+
+    Methods
     _______
 
-    print: is the blueprint for each document derived from this class
-
-    Properties:
-    extension str: the blueprint for each document derived from the Document
-    blueprint
+    print()
+        Abstract method to print the document
     """
 
     extension: str = ""
@@ -102,7 +104,7 @@ class DocumentCreator(ABC):
         print(document.extension)
 
 
-# Concrete creators above, one per document type
+# Concrete creators below, one per document type
 # PDF
 class PDFDocumentCreator(DocumentCreator):
     def create_document(self) -> Document:
