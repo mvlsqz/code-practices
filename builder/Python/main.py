@@ -10,7 +10,7 @@ class Sandwich:
         self.bread = bread
         self.ingredients = ingredients or []
 
-    def describe(self):
+    def describe(self) -> str:
         filled = ",\n".join(self.ingredients) if self.ingredients else "nothing"
         bread_type = self.bread or "no bread selected"
 
@@ -20,7 +20,7 @@ class Sandwich:
 
 class BreadOptions:
     def __init__(self) -> None:
-        self.options = []
+        self.options: List[str]
 
     def add_option(self, option: str) -> Self:
         self.options.append(option)
