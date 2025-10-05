@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class Document(ABC):
-    """ "
+    """
     Document class is the base abstraction for document implementation
 
     methods
@@ -68,7 +68,7 @@ class MarkdownDocument(Document):
 
 class DocumentCreator(ABC):
     """
-    DocumentCreator is the engine that enables us to the factory method functionality
+    DocumentCreator is the engine that enables us to uset the factory method functionality
     - Instantiate/cache Document class for initial usage or re-use
     - Implement common methods that each document created exposes to the client side
     """
@@ -78,7 +78,7 @@ class DocumentCreator(ABC):
 
     def base_document(self) -> Document:
         """
-        provides the cache like functionality, if the document don't exist it
+        provides the cache like functionality, if the document doesn't exist it
         initializes it
         """
         if self._document is None:
