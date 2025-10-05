@@ -14,8 +14,7 @@ class Sandwich:
         filled = ",\n".join(self.ingredients) if self.ingredients else "nothing"
         bread_type = self.bread or "no bread selected"
 
-        return f"""
-You've got a sandwich made of: a {bread_type} and filled out with:
+        return f"""You've got a sandwich made of: a {bread_type} and filled out with:
 {filled}"""
 
 
@@ -32,12 +31,31 @@ class BreadOptions:
 
 
 class SandwichBuilder:
+    """
+    SandwichBuilder class implements the Sandwich class by using Builder pattern
+    Attributes
+    ----------
+        sandwich (Sandwich): The sandwich being built
+        bread_options (BreadOptions): Available bread options for the sandwich
+    Parameters
+    ----------
+        bread_options (BreadOptions): The bread options to choose from
+
+    Example
+    -------
+    >>> bread_options = BreadOptions().add_option("white bread").add_option("whole wheat")
+    >>> sandwich_builder = SandwichBuilder(bread_options)
+    >>> my_sandwich = sandwich_builder.bread_option("white bread").add_ingredient("ham").add_ingredient("lettuce").describe()
+    >>> my_sandwich.describe()
+    >>> my_sandwich.reset() ## start a new sandwich by using the same builder
+    """
+
     def __init__(self, bread_options: BreadOptions) -> None:
         self.sandwich = Sandwich()
-        self.bread_options = bread_options.get_options()
+        self.bread_options = bread_options
 
     def bread_option(self, option: str) -> Self:
-        if option not in self.bread_options:
+        if option not in self.bread_options.get_options():
             raise ValueError(
                 f"{option} is not available, choose from {self.bread_options}"
             )
