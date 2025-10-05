@@ -9,10 +9,10 @@ of its own class and move it to separate objects called builders.
 
 Characteristics:
 - separate the construction of an object from its representation
-- same construction can create different representation of related objects
+- same construction can create different representations of related objects
 
 ## When to use
-- Crete complex objects, with many optional parameters or parts
+- Create complex objects, with many optional parameters or parts
 - To build more readable code when creating complex objects
 - Avoid telescoping constructor - constructors with many parameters
 

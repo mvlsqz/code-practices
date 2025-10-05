@@ -36,7 +36,7 @@ class SandwichBuilder:
         self.sandwich = Sandwich()
         self.bread_options = bread_options.get_options()
 
-    def bread_option(self, option: str) -> "SandwichBuilder":
+    def bread_option(self, option: str) -> Self:
         if option not in self.bread_options:
             raise ValueError(
                 f"{option} is not available, choose from {self.bread_options}"
@@ -67,7 +67,7 @@ def main():
         "white bread",
         "whole wheat",
         "sourdough",
-        "bagguette",
+        "baguette",
         "ciabatta",
     ]
     bread_options = BreadOptions()
@@ -90,7 +90,7 @@ def main():
     regular_sandwich.reset()
 
     another_sandwich = (
-        regular_sandwich.bread_option("bagguette")
+        regular_sandwich.bread_option("baguette")
         .add_ingredient("cheese")
         .add_ingredient("ham")
         .add_ingredient("pepper")
