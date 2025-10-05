@@ -1,26 +1,34 @@
 #! /usr/bin/env python3
+
+from typing import List, Optional, Self
+
+
 class Sandwich:
-    def __init__(self, bread: str = "", ingredients: list = []) -> None:
+    def __init__(
+        self, bread: str = "", ingredients: Optional[List[str]] = None
+    ) -> None:
         self.bread = bread
-        self.ingredients = ingredients
+        self.ingredients = ingredients or []
 
     def describe(self):
+        filled = ",\n".join(self.ingredients) if self.ingredients else "nothing"
+        bread_type = self.bread or "no bread selected"
+
         return f"""
-You've got a sandwich made of: {self.bread} and filled out with:
-{",\n".join(self.ingredients)}
-"""
+You've got a sandwich made of: a {bread_type} and filled out with:
+{filled}"""
 
 
 class BreadOptions:
     def __init__(self) -> None:
         self.options = []
 
-    def add_option(self, option: str):
+    def add_option(self, option: str) -> Self:
         self.options.append(option)
         return self
 
-    def get_options(self):
-        return self.options
+    def get_options(self) -> List[str]:
+        return self.options[:]
 
 
 class SandwichBuilder:
@@ -28,21 +36,30 @@ class SandwichBuilder:
         self.sandwich = Sandwich()
         self.bread_options = bread_options.get_options()
 
-    def bread_option(self, option: str):
-        try:
-            choice = self.bread_options.index(option)
-            self.sandwich.bread = self.bread_options[choice]
-        except ValueError as e:
-            raise e
+    def bread_option(self, option: str) -> "SandwichBuilder":
+        if option not in self.bread_options:
+            raise ValueError(
+                f"{option} is not available, choose from {self.bread_options}"
+            )
+
+        self.sandwich.bread = option
         return self
 
-    def add_ingredient(self, ingredient: str):
+    def add_ingredient(self, ingredient: str) -> Self:
         self.sandwich.ingredients.append(ingredient)
 
         return self
 
-    def build(self):
+    def build(self) -> Sandwich:
+        if not self.sandwich.bread or not self.sandwich.ingredients:
+            missing = "bread is" if not self.sandwich.bread else "ingredients are"
+
+            raise ValueError(f"The {missing} missing from this order")
         return self.sandwich
+
+    def reset(self) -> Self:
+        self.sandwich = Sandwich()
+        return self
 
 
 def main():
@@ -50,7 +67,7 @@ def main():
         "white bread",
         "whole wheat",
         "sourdough",
-        "baggette",
+        "bagguette",
         "ciabatta",
     ]
     bread_options = BreadOptions()
@@ -60,11 +77,27 @@ def main():
 
     regular_sandwich = SandwichBuilder(bread_options)
 
-    regular_sandwich.bread_option("white bread").add_ingredient("ham").add_ingredient(
-        "lettuce"
-    ).add_ingredient("mushrooms")
+    sandwich = (
+        regular_sandwich.bread_option("white bread")
+        .add_ingredient("ham")
+        .add_ingredient("lettuce")
+        .add_ingredient("mushrooms")
+        .build()
+    )
 
-    print(regular_sandwich.build().describe())
+    print(sandwich.describe())
+
+    regular_sandwich.reset()
+
+    another_sandwich = (
+        regular_sandwich.bread_option("bagguette")
+        .add_ingredient("cheese")
+        .add_ingredient("ham")
+        .add_ingredient("pepper")
+        .build()
+    )
+
+    print(another_sandwich.describe())
 
 
 if __name__ == "__main__":
