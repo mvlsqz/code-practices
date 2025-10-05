@@ -47,15 +47,15 @@ class SandwichBuilder:
     >>> sandwich_builder = SandwichBuilder(bread_options)
     >>> my_sandwich = sandwich_builder.bread_option("white bread").add_ingredient("ham").add_ingredient("lettuce").describe()
     >>> my_sandwich.describe()
-    >>> my_sandwich.reset() ## start a new sandwich by using the same builder
+    >>> sandwich_builder.reset() ## start a new sandwich by using the same builder
     """
 
     def __init__(self, bread_options: BreadOptions) -> None:
         self.sandwich = Sandwich()
-        self.bread_options = bread_options
+        self.bread_options = bread_options.get_options()
 
     def bread_option(self, option: str) -> Self:
-        if option not in self.bread_options.get_options():
+        if option not in self.bread_options:
             raise ValueError(
                 f"{option} is not available, choose from {self.bread_options}"
             )
@@ -69,10 +69,16 @@ class SandwichBuilder:
         return self
 
     def build(self) -> Sandwich:
-        if not self.sandwich.bread or not self.sandwich.ingredients:
-            missing = "bread is" if not self.sandwich.bread else "ingredients are"
-
-            raise ValueError(f"The {missing} missing from this order")
+        missing = [
+            part
+            for part, miss in (
+                ("bread", self.sandwich.bread),
+                ("ingredients", self.sandwich.ingredients),
+            )
+            if not miss
+        ]
+        if missing:
+            raise ValueError(f"Missing: {', '.join(missing)}")
         return self.sandwich
 
     def reset(self) -> Self:
