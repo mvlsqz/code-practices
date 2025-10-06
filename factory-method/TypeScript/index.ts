@@ -37,12 +37,16 @@ class MarkdownDocument implements BaseDocument {
 }
 
 abstract class DocumentCreator {
-  document = this.createDocument();
+  protected document: BaseDocument;
+
+  constructor() {
+    this.document = this.createDocument();
+  }
 
   abstract createDocument(): BaseDocument;
 
   getDocument(): BaseDocument {
-    return this.document;
+    return this.createDocument();
   }
 
   printDocument(): void {
