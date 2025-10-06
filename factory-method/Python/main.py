@@ -15,10 +15,6 @@ class Document(ABC):
 
         print()
             Abstract method to print the document
-
-    Returns
-    -------
-        None:
     """
 
     extension: str = ""
