@@ -78,7 +78,7 @@ class DocumentCreator(ABC):
     def __init__(self) -> None:
         self._document = None
 
-    def base_document(self) -> Document:
+    def get_document(self) -> Document:
         """
         provides the cache like functionality, if the document doesn't exist it
         initializes it
@@ -99,14 +99,14 @@ class DocumentCreator(ABC):
         """
         Prints the document using the cached or newly created document instance.
         """
-        document = self.base_document()
+        document = self.get_document()
         document.print()
 
     def print_document_extension(self):
         """
         Prints the file extension of the cached or newly created document instance.
         """
-        document = self.base_document()
+        document = self.get_document()
         print(document.extension)
 
 
