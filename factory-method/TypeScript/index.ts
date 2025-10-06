@@ -32,7 +32,7 @@ class MarkdownDocument implements BaseDocument {
   extension: string = "md";
 
   print(): void {
-    console.log("Printing Text Document");
+    console.log("Printing Markdown Document");
   }
 }
 
