@@ -5,7 +5,7 @@ interface BaseDocument {
 }
 
 class PDFDocument implements BaseDocument {
-  extension: string = "pfd";
+  extension: string = "pdf";
 
   print(): void {
     console.log("Printing PDF Document");
