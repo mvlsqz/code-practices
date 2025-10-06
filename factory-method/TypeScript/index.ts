@@ -41,10 +41,7 @@ abstract class DocumentCreator {
 
   abstract createDocument(): BaseDocument;
 
-  baseDocument(): BaseDocument {
-    if (this.document === this.createDocument()) {
-      this.document = this.createDocument();
-    }
+  getDocument(): BaseDocument {
     return this.document;
   }
 
