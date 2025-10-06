@@ -7,14 +7,18 @@ class Document(ABC):
 
     Attributes
     ----------
-    extension : str
-        The file extension for the document type
+        extension : str
+            The file extension for the document type
 
     Methods
     _______
 
-    print()
-        Abstract method to print the document
+        print()
+            Abstract method to print the document
+
+    Returns
+    -------
+        None:
     """
 
     extension: str = ""
